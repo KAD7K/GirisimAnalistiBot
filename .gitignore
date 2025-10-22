@@ -1,0 +1,17 @@
+# Python sanal ortamı
+.venv/
+__pycache__/
+
+# API Anahtarları ve Gizli Dosyalar
+.env
+*.env
+
+# VS Code ayarları
+.vscode/
+
+# Jupyter/Colab cache
+.ipynb_checkpoints/
+
+# === CHROMA VERİTABANINI YORSA ===
+chroma_db/
+chroma_db_colab/
