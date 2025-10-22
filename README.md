@@ -1,6 +1,6 @@
 🚀 Girişim Fikri Değerlendirme Chatbot
 RAG (Retrieval-Augmented Generation) tabanlı, Claude AI ile güçlendirilmiş, startup ve girişim fikirlerinizi profesyonel bir şekilde analiz eden chatbot.
-
+Projenin çalışan halinin videosu: https://drive.google.com/file/d/1vxwcMb9XKCf_YP1opGKWKYQIGtfBxTt8/view?usp=sharing
 📋 İçindekiler
 
 Özellikler
@@ -96,3 +96,4 @@ Veritabanını Yeniden Oluşturma
 PDF'lerinizi güncellediyseniz veya yeni belgeler eklediyseniz, veritabanını yeniden oluşturun:
 bashpython build_db.py
 Bu komut eski veritabanını silip yeniden oluşturacaktır.
+
