@@ -1,80 +1,98 @@
-# 🚀 Girişim Fikri Değerlendirme Chatbot'u
+🚀 Girişim Fikri Değerlendirme Chatbot
+RAG (Retrieval-Augmented Generation) tabanlı, Claude AI ile güçlendirilmiş, startup ve girişim fikirlerinizi profesyonel bir şekilde analiz eden chatbot.
 
-**Akbank Generative AI Giriş Bootcamp Projesi**
+📋 İçindekiler
 
-Bu proje, bir "Girişim Analisti" olarak görev yapan ve [Retrieval Augmented Generation (RAG)](https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/) mimarisini kullanan bir sohbet botudur. Kullanıcıdan alınan startup fikirlerini, Y Combinator, Paul Graham ve Andreessen Horowitz (a16z) gibi önde gelen kaynaklardan derlenen bir bilgi tabanına (PDF dokümanları) dayanarak analiz eder ve yapılandırılmış bir rapor sunar.
+Özellikler
+Nasıl Çalışır?
+Kurulum
+Kullanım
+Hugging Face'e Deploy
+Proje Yapısı
+Teknolojiler
+Lisans
 
-## Demo
+✨ Özellikler
 
-**(İsteğe bağlı: Hugging Face'e deploy ettikten sonra buraya linki ve bir ekran görüntüsünü ekleyebilirsiniz.)**
+🤖 Claude 3.5 Sonnet ile güçlendirilmiş yapay zeka
+📚 RAG (Retrieval-Augmented Generation) teknolojisi ile belge tabanlı analiz
+🎯 Startup odaklı değerlendirme - Y Combinator, Paul Graham, a16z kaynaklı bilgiler
+🔍 6 kapsamlı analiz kategorisi:
 
-`[Buraya Hugging Face Spaces Linkinizi Ekleyin]`
+Asansör Sunumu ve Değer Önermesi
+Problem Analizi
+Çözüm ve Ürün Konsepti
+Pazar Potansiyeli
+Kurucu ve Ekip Potansiyeli
+İlk Adım ve Doğrulama Stratejisi
 
-![Girişim Analisti Chatbot Arayüzü](https(link-eklenecek)/gorsel.png)
 
-## Proje Mimarisi (RAG)
+🎨 Kullanıcı dostu Gradio arayüzü
+⚡ Otomatik vektör veritabanı oluşturma
+📄 PDF belgelerden öğrenme
 
-[cite_start]Bu proje, bootcamp'in ana gereksinimi olan RAG mimarisini  uygulamak için **LangChain** kütüphanesini kullanır. Sistemin çalışma akışı şu adımlardan oluşur:
+🔧 Nasıl Çalışır?
 
-1.  **Bilgi Tabanı (Knowledge Base):** `data/` klasörü içinde bulunan PDF dosyaları (startup rehberleri, denemeler vb.) projenin bilgi kaynağı olarak kullanılır.
+Vektör Veritabanı Oluşturma: data/ klasöründeki PDF'ler chunklara ayrılır ve embeddings oluşturulur
+Soru Gönderme: Kullanıcı girişim fikrini chatbot'a yazar
+Retrieval: En alakalı bilgiler vektör veritabanından çekilir
+Generation: Claude AI, bu bilgileri kullanarak profesyonel analiz oluşturur
+Sonuç: Detaylı startup değerlendirme raporu kullanıcıya sunulur
 
-2.  **Indeksleme (Indexing):**
-    * **Yükleme:** `PyPDFLoader` ile `data/` klasöründeki tüm PDF'ler okunur.
-    * **Parçalama:** `RecursiveCharacterTextSplitter` kullanılarak metinler, birbirleriyle örtüşen (overlap) daha küçük parçalara (chunk) bölünür (chunk_size: 1000, overlap: 200).
-    * **Gömme (Embedding):** `HuggingFaceEmbeddings` (model: `sentence-transformers/all-MiniLM-L6-v2`) ile her bir metin parçası vektörel bir temsile dönüştürülür.
-    * **Depolama:** Bu vektörler, kalıcı bir yerel veritabanı olan `ChromaDB`'ye kaydedilir (`chroma_db_colab` klasörü).
+🛠️ Kurulum
+Gereksinimler
 
-3.  **Getirme ve Üretme (Retrieval & Generation):**
-    * **Sorgu:** Kullanıcı, girişim fikrini (örn: "Yapay zeka destekli kişisel finans asistanı") arayüze girer.
-    * **Getirme (Retrieval):** Kullanıcının sorgusu da vektöre dönüştürülür ve `ChromaDB` içinde anlamsal bir arama yapılır. Fikirle en alakalı `k=5` adet metin parçası (chunk) veritabanından çekilir.
-    * **Zenginleştirme (Augmentation):** Bu 5 parça, "Bağlam" (Context) olarak bir prompt şablonuna yerleştirilir. Kullanıcının sorusu da "Soru" (Question) olarak eklenir. Bu prompt, yapay zekaya "Girişim Analisti" rolünü verir ve 6 adımlı bir rapor formatı talep eder.
-    * **Üretme (Generation):** Hazırlanan bu zenginleştirilmiş prompt, `ChatAnthropic` (model: `claude-3-5-sonnet-20241022`) modeline gönderilir. LLM, yalnızca kendisine sağlanan bağlamdaki bilgileri kullanarak istenen formatta detaylı analiz raporunu üretir.
+Python 3.10 veya üstü
+Anthropic API Key (Claude)
 
-## Kullanılan Teknolojiler
+Adımlar
 
-* **LLM:** Anthropic Claude 3.5 Sonnet
-* **Framework:** LangChain
-* **Embedding Modeli:** `sentence-transformers/all-MiniLM-L6-v2`
-* **Vektör Veritabanı:** ChromaDB
-* **Arayüz (Frontend):** Gradio
+Repoyu klonlayın
 
-## Kurulum ve Çalıştırma
+bashgit clone https://github.com/KULLANICI_ADINIZ/girisim-chatbot.git
+cd girisim-chatbot
 
-Bu projeyi yerel makinenizde çalıştırmak için aşağıdaki adımları izleyin:
+Sanal ortam oluşturun (önerilir)
 
-1.  **Projeyi Klonlayın:**
-    ```bash
-    git clone [https://github.com/KAD7K/GirisimAnalistiBot.git](https://github.com/KAD7K/GirisimAnalistiBot.git)
-    cd GirisimAnalistiBot
-    ```
+bashpython -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
 
-2.  **Sanal Ortam (Virtual Environment) Oluşturun ve Aktif Edin:**
-    ```bash
-    # Windows
-    python -m venv .venv
-    .\.venv\Scripts\Activate.ps1
-    ```
+Bağımlılıkları yükleyin
 
-3.  **Gerekli Kütüphaneleri Yükleyin:**
-    ```bash
-    pip install -r requirements.txt
-    ```
+bashpip install -r requirements.txt
 
-4.  **API Anahtarınızı Ekleyin:**
-    * Proje ana dizininde `.env` adında bir dosya oluşturun.
-    * İçine Anthropic API anahtarınızı aşağıdaki formatta yapıştırın:
-        ```
-        ANTHROPIC_API_KEY=sk-ant-xxxxxxxxxxxxxxxxxxxx
-        ```
+API anahtarını ayarlayın
 
-5.  **(İsteğe Bağlı) Kendi Verilerinizi Ekleyin:**
-    * Proje, `data/` klasöründeki mevcut PDF'lerle çalışacaktır.
-    * Kendi bilgi tabanınızı kullanmak isterseniz, `data/` klasörüne kendi PDF dosyalarınızı ekleyebilir (veya mevcutları silebilirsiniz).
+.env dosyası oluşturun:
+envANTHROPIC_API_KEY=your_api_key_here
 
-6.  **Uygulamayı Çalıştırın:**
-    ```bash
-    python app.py
-    ```
+PDF belgelerinizi ekleyin
 
-    * **Not:** Uygulama (`app.py`) ilk kez çalıştığında, `chroma_db_colab` adlı bir veritabanı klasörü arayacaktır. Bulamazsa, `build_db.py` script'ini otomatik olarak tetikleyerek `data/` klasöründeki PDF'lerden veritabanını oluşturacaktır. Bu ilk kurulum işlemi, PDF'lerinizin boyutuna bağlı olarak birkaç dakika sürebilir.
-    * Veritabanı oluşturulduktan sonra Gradio arayüzü başlayacak ve terminalde size yerel bir URL (örn: `http://127.0.0.1:7860`) verecektir. Bu adresi tarayıcınızda açarak chatbot'u kullanabilirsiniz.
+data/ klasörü oluşturun ve startup ile ilgili PDF belgelerinizi bu klasöre atın:
+bashmkdir data
+# PDF dosyalarınızı data/ klasörüne kopyalayın
+
+Vektör veritabanını oluşturun
+
+İlk kullanımda PDF'lerden vektör veritabanı oluşturmanız gerekiyor:
+bashpython build_db.py
+Bu işlem PDF'lerinizin boyutuna göre birkaç dakika sürebilir. İşlem tamamlandığında chroma_db_colab/ klasörü oluşacaktır.
+
+Uygulamayı başlatın
+
+bashpython app.py
+Tarayıcınızda http://127.0.0.1:7860 adresine gidin.
+
+💡 Not: app.py otomatik olarak veritabanı yoksa oluşturacaktır, ancak ilk kullanımda manuel olarak build_db.py çalıştırmanız önerilir.
+
+🎮 Kullanım
+Örnek Sorular
+"Sokak hayvanları için akıllı mama kapları geliştiren bir sosyal girişim fikrim var."
+
+"Öğrencilerin ikinci el ders kitaplarını kolayca satıp alabileceği bir mobil uygulama."
+
+"Yapay zeka destekli kişisel finans asistanı geliştirmek istiyorum."
+Veritabanını Yeniden Oluşturma
+PDF'lerinizi güncellediyseniz veya yeni belgeler eklediyseniz, veritabanını yeniden oluşturun:
+bashpython build_db.py
+Bu komut eski veritabanını silip yeniden oluşturacaktır.
