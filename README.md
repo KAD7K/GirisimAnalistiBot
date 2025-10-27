@@ -191,6 +191,7 @@ mkdir data
 ```
 
 **Nereden Veri Bulabilirim?**
+- Kendi kullandığım veri kaynakları: https://drive.google.com/drive/folders/1i6HZCQkGk3kq1JjK6zv9GGzGezowzXwE?usp=sharing
 - 📚 [Hugging Face Datasets](https://huggingface.co/datasets)
 - 📄 Kendi PDF dokümanlarınız
 - 🌐 Web scraping (legal olduğundan emin olun)
@@ -384,4 +385,5 @@ Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICE
 ## 🙏 Teşekkürler
 
 - **Akbank & Global AI Hub** - Bootcamp organizasyonu
+
 
